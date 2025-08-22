@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.Pharm MCQ Practice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+    .mcq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 15px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .question {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .question h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    .correct { color: green; }
+    .wrong { color: red; }
+    .unanswered { color: orange; }
+    .btn {
+      margin: 20px auto;
+      display: block;
+      width: fit-content;
+      padding: 10px 20px;
+      background: #007BFF;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn:hover { background: #0056b3; }
+    #score {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>B.Pharm MCQ Practice (30 Questions)</h1>
+
+  <div class="mcq-grid" id="quiz"></div>
+
+  <button class="btn" onclick="checkScore()">Check Score</button>
+  <div id="score"></div>
+
+  <a href="index.html" class="btn"> Back to Home</a>
+
+  <script>
+    const quizData = [
+      {q:"Which organ is mainly responsible for drug metabolism?", o:["Kidney","Liver","Lungs","Stomach"], a:"Liver"},
+      {q:"What is the pH of human blood?", o:["6.8","7.0","7.4","8.0"], a:"7.4"},
+      {q:"Father of Modern Pharmacy?", o:["William Procter Jr.","Alexander Fleming","Louis Pasteur","Paul Ehrlich"], a:"William Procter Jr."},
+      {q:"Bioavailability refers to?", o:["Drug solubility","Fraction of drug absorbed","Rate of excretion","None"], a:"Fraction of drug absorbed"},
+      {q:"Half-life of a drug depends on?", o:["Clearance","Volume of distribution","Both A & B","Bioavailability"], a:"Both A & B"},
+      {q:"Normal body temperature in °C?", o:["35","36.5","37","38"], a:"37"},
+      {q:"Which is a Schedule H drug?", o:["Paracetamol","Ciprofloxacin","Vitamin C","Glucose"], a:"Ciprofloxacin"},
+      {q:"Which instrument measures absorbance?", o:["Manometer","Colorimeter","Tonometer","Stethoscope"], a:"Colorimeter"},
+      {q:"Which is NOT a route of drug administration?", o:["Oral","Intravenous","Transdermal","X-ray"], a:"X-ray"},
+      {q:"Normal GFR in adults?", o:["50 ml/min","125 ml/min","200 ml/min","300 ml/min"], a:"125 ml/min"},
+      {q:"First-pass metabolism occurs in?", o:["Heart","Liver","Kidney","Lungs"], a:"Liver"},
+      {q:"Which is an example of isotonic solution?", o:["0.9% NaCl","10% Glucose","5% NaCl","1% NaOH"], a:"0.9% NaCl"},
+      {q:"Mol. weight of Paracetamol?", o:["151 g/mol","120 g/mol","200 g/mol","180 g/mol"], a:"151 g/mol"},
+      {q:"Which vitamin is fat soluble?", o:["Vit C","Vit B","Vit K","Vit B12"], a:"Vit K"},
+      {q:"Which of these is NOT sterile?", o:["Eye drops","IV fluids","Oral tablets","Injections"], a:"Oral tablets"},
+      {q:"Which law governs absorbance?", o:["Boyle’s law","Beer-Lambert law","Dalton’s law","Henry’s law"], a:"Beer-Lambert law"},
+      {q:"Which instrument is used for particle size analysis?", o:["Microscope","Sieve shaker","Spectrometer","pH meter"], a:"Sieve shaker"},
+      {q:"Drug that reduces fever?", o:["Analgesic","Antipyretic","Antiseptic","Antacid"], a:"Antipyretic"},
+      {q:"Universal solvent?", o:["Alcohol","Water","Ether","Acetone"], a:"Water"},
+      {q:"Which phase comes after Clinical Phase II?", o:["Phase I","Phase III","Phase IV","Preclinical"], a:"Phase III"},
+      {q:"Blood volume in adults?", o:["3 L","4 L","5 L","10 L"], a:"5 L"},
+      {q:"Which drug is used in malaria?", o:["Paracetamol","Chloroquine","Ibuprofen","Ciprofloxacin"], a:"Chloroquine"},
+      {q:"Which is a controlled drug schedule?", o:["Schedule X","Schedule H","Schedule C","Schedule K"], a:"Schedule X"},
+      {q:"Drug for hypertension?", o:["Omeprazole","Atenolol","Ciprofloxacin","Amoxicillin"], a:"Atenolol"},
+      {q:"Which gas is used in anesthesia?", o:["Oxygen","Nitrous oxide","Carbon dioxide","Helium"], a:"Nitrous oxide"},
+      {q:"Which unit measures radioactivity?", o:["Pascal","Curie","Volt","Newton"], a:"Curie"},
+      {q:"pH of gastric juice?", o:["1-2","4-5","6","7"], a:"1-2"},
+      {q:"Which dosage form releases drug slowly?", o:["Tablet","Capsule","Sustained release tablet","Injection"], a:"Sustained release tablet"},
+      {q:"Drug for diabetes?", o:["Insulin","Atropine","Aspirin","Chlorpheniramine"], a:"Insulin"},
+      {q:"Which dosage form is applied on skin?", o:["Ointment","Tablet","Capsule","Injection"], a:"Ointment"}
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+
+    quizData.forEach((q, index) => {
+      const questionDiv = document.createElement("div");
+      questionDiv.classList.add("question");
+      questionDiv.innerHTML = `
+        <h3>Q${index + 1}: ${q.q}</h3>
+        <div class="options">
+          ${q.o.map(opt => `
+            <label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label>
+          `).join("")}
+        </div>
+        <div class="result" id="result${index}"></div>
+      `;
+      quizContainer.appendChild(questionDiv);
+
+      const inputs = questionDiv.querySelectorAll("input");
+      inputs.forEach(input => {
+        input.addEventListener("change", () => {
+          const resultDiv = document.getElementById(`result${index}`);
+          if (input.value === q.a) {
+            resultDiv.textContent = "✅ Correct!";
+            resultDiv.className = "result correct";
+          } else {
+            resultDiv.textContent = `❌ Wrong! Correct: ${q.a}`;
+            resultDiv.className = "result wrong";
+          }
+        });
+      });
+    });
+
+    function checkScore() {
+      let score = 0;
+      quizData.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        const resultDiv = document.getElementById(`result${index}`);
+        if (selected) {
+          if (selected.value === q.a) {
+            score++;
+          }
+        } else {
+          resultDiv.textContent = "⚠ Unanswered!";
+          resultDiv.className = "result unanswered";
+        }
+      });
+      document.getElementById("score").textContent = `Your Final Score: ${score} / ${quizData.length}`;
+    }
+  </script>
+
+</body>
+</html>

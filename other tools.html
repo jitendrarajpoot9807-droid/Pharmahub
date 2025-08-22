@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Other Tools</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f9f9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .tool-card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+      text-align: left;
+      transition: transform 0.2s;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: #3498db;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #2c3e50;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 16px;
+      background: #27ae60;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      background: #1e8449;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-btn">⬅ Back to Home</a>
+  <h1>Other Tools</h1>
+
+  <div class="tools-grid">
+
+    <!-- Drug Dose Calculator -->
+    <div class="tool-card">
+      <h2>Drug Dose Calculator</h2>
+      <label>Enter Weight (kg):</label>
+      <input type="number" id="weight" placeholder="e.g. 60">
+      <label>Dose per kg (mg/kg):</label>
+      <input type="number" id="dosePerKg" placeholder="e.g. 10">
+      <button onclick="calculateDose()">Calculate</button>
+      <p id="doseResult"></p>
+    </div>
+
+    <!-- Dilution Calculator -->
+    <div class="tool-card">
+      <h2>Dilution Calculator</h2>
+      <label>C1 (Initial concentration %):</label>
+      <input type="number" id="c1">
+      <label>V1 (Volume needed ml):</label>
+      <input type="number" id="v1">
+      <label>C2 (Final concentration %):</label>
+      <input type="number" id="c2">
+      <button onclick="calculateDilution()">Calculate V2</button>
+      <p id="dilutionResult"></p>
+    </div>
+
+    <!-- Molarity Molality Calculator -->
+    <div class="tool-card">
+      <h2>Molarity & Molality Calculator</h2>
+      <label>Moles of Solute (mol):</label>
+      <input type="number" id="moles">
+      <label>Volume of Solution (L):</label>
+      <input type="number" id="volume">
+      <label>Mass of Solvent (kg):</label>
+      <input type="number" id="mass">
+      <button onclick="calculateMolar()">Calculate</button>
+      <p id="molarResult"></p>
+    </div>
+
+    <!-- Drug Interaction Checker -->
+    <div class="tool-card">
+      <h2>Drug Interaction Checker</h2>
+      <label>Drug 1:</label>
+      <input type="text" id="drug1" placeholder="e.g. Aspirin">
+      <label>Drug 2:</label>
+      <input type="text" id="drug2" placeholder="e.g. Warfarin">
+      <button onclick="checkInteraction()">Check</button>
+      <p id="interactionResult"></p>
+    </div>
+
+    <!-- BMI Calculator -->
+    <div class="tool-card">
+      <h2>BMI Calculator</h2>
+      <label>Weight (kg):</label>
+      <input type="number" id="bmiWeight" placeholder="e.g. 70">
+      <label>Height (cm):</label>
+      <input type="number" id="bmiHeight" placeholder="e.g. 170">
+      <button onclick="calculateBMI()">Calculate</button>
+      <p id="bmiResult"></p>
+    </div>
+
+    <!-- IV Drip Rate Calculator -->
+    <div class="tool-card">
+      <h2>IV Drip Rate Calculator</h2>
+      <label>Volume (ml):</label>
+      <input type="number" id="ivVolume" placeholder="e.g. 500">
+      <label>Time (hours):</label>
+      <input type="number" id="ivTime" placeholder="e.g. 4">
+      <label>Drop Factor (drops/ml):</label>
+      <input type="number" id="ivDrop" placeholder="e.g. 20">
+      <button onclick="calculateIV()">Calculate</button>
+      <p id="ivResult"></p>
+    </div>
+
+  </div>
+
+  <script>
+    function calculateDose() {
+      let weight = document.getElementById("weight").value;
+      let dosePerKg = document.getElementById("dosePerKg").value;
+      if(weight && dosePerKg){
+        let total = weight * dosePerKg;
+        document.getElementById("doseResult").innerText = "Total Dose = " + total + " mg";
+      }
+    }
+
+    function calculateDilution() {
+      let c1 = document.getElementById("c1").value;
+      let v1 = document.getElementById("v1").value;
+      let c2 = document.getElementById("c2").value;
+      if(c1 && v1 && c2){
+        let v2 = (c1 * v1) / c2;
+        document.getElementById("dilutionResult").innerText = "Required Final Volume (V2) = " + v2.toFixed(2) + " ml";
+      }
+    }
+
+    function calculateMolar() {
+      let moles = document.getElementById("moles").value;
+      let volume = document.getElementById("volume").value;
+      let mass = document.getElementById("mass").value;
+      if(moles && volume && mass){
+        let molarity = moles / volume;
+        let molality = moles / mass;
+        document.getElementById("molarResult").innerText =
+          "Molarity = " + molarity.toFixed(3) + " M, Molality = " + molality.toFixed(3) + " m";
+      }
+    }
+
+    function checkInteraction() {
+      let d1 = document.getElementById("drug1").value.toLowerCase();
+      let d2 = document.getElementById("drug2").value.toLowerCase();
+
+      let interactions = {
+        "aspirin+warfarin": "⚠️ Increased risk of bleeding.",
+        "metformin+alcohol": "⚠️ Risk of lactic acidosis.",
+        "ibuprofen+prednisolone": "⚠️ Risk of GI bleeding."
+      };
+
+      let key1 = d1 + "+" + d2;
+      let key2 = d2 + "+" + d1;
+
+      if (interactions[key1]) {
+        document.getElementById("interactionResult").innerText = interactions[key1];
+      } else if (interactions[key2]) {
+        document.getElementById("interactionResult").innerText = interactions[key2];
+      } else {
+        document.getElementById("interactionResult").innerText = "✅ No major interaction found (basic check).";
+      }
+    }
+
+    function calculateBMI() {
+      let weight = document.getElementById("bmiWeight").value;
+      let height = document.getElementById("bmiHeight").value;
+      if(weight && height){
+        let hMeters = height / 100;
+        let bmi = weight / (hMeters * hMeters);
+        let category = "";
+        if(bmi < 18.5) category = "Underweight";
+        else if(bmi < 25) category = "Normal";
+        else if(bmi < 30) category = "Overweight";
+        else category = "Obese";
+        document.getElementById("bmiResult").innerText = "BMI = " + bmi.toFixed(1) + " (" + category + ")";
+      }
+    }
+
+    function calculateIV() {
+      let volume = document.getElementById("ivVolume").value;
+      let time = document.getElementById("ivTime").value;
+      let drop = document.getElementById("ivDrop").value;
+      if(volume && time && drop){
+        let rate = (volume * drop) / (time * 60);
+        document.getElementById("ivResult").innerText = "Drip Rate = " + rate.toFixed(1) + " drops/min";
+      }
+    }
+  </script>
+
+</body>
+</html>

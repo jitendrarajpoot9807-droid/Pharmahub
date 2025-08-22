@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pharmahub</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fixed-Shape Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+  <div class="outer">
+    <div class="middle">
+      <div class="inner" id="viewport">
+        <h2 class="sitename">PHARMAHUB</h2>
+        <div class="board" id="board">
+
+          <!-- Card 1: BMI -->
+          <div class="card flex-box-1">
+            <div class="tool-card">
+              <h2>BMI Calculator</h2>
+              <label>Weight (kg):</label>
+              <input type="number" id="bmiWeight" placeholder="e.g. 70">
+              <label>Height (cm):</label>
+              <input type="number" id="bmiHeight" placeholder="e.g. 170">
+              <button onclick="calculateBMI()">Calculate</button>
+              <p id="bmiResult"></p>
+            </div>
+          </div>
+
+          <!-- Card 3: Drug Dose -->
+          <div class="card flex-box-3">
+            <div class="tool-card-3">
+              <h2>Drug Dose Calculator</h2>
+              <label>Enter Weight (kg):</label>
+              <input type="number" id="weight" placeholder="e.g. 60">
+              You Calculated
+              <label>Dose per kg (mg/kg):</label>
+              <input type="number" id="dosePerKg" placeholder="e.g. 10">
+              <button onclick="calculateDose()">Calculate</button>
+              <p id="doseResult"></p>
+            </div>
+          </div>
+
+          <!-- Card 2: CGPA -->
+          <div class="card flex-box-2">
+            <div class="tool-box">
+              <h2>CGPA to % Calculator</h2>
+              <label>Enter CGPA:</label>
+              <input type="number" step="0.01" id="cgpa">
+              <button onclick="calcCGPA()">Convert</button>
+              <p id="cgpaResult"></p>
+            </div>
+            
+          
+          </div>
+          <!-- Card 4: Buttons -->
+          <div class="card flex-box-4">
+            <h2>Quick Tools</h2>
+              <div class="line-container">
+                <h3>
+                <nav>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="subjects.html">Subjects</a></li>
+                <li><a href="mcq.html">MCQ's Practice</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="other tools.html">Other Tools</a></li>
+              </nav>
+              </h3>
+            </div>
+
+            
+            <style>
+              a:link {
+                color: green;
+                background-color: transparent;
+                text-decoration: none;
+              }
+              
+              a:visited {
+                color: rgb(255, 255, 255);
+                background-color: transparent;
+                text-decoration: none;
+              }
+              
+              a:hover {
+                color: red;
+                background-color: transparent;
+                text-decoration: underline;
+              }
+              
+              a:active {
+                color: yellow;
+                background-color: transparent;
+                text-decoration: underline;
+              }
+              </style>
+
+<div class="freebooks">
+  <h2>Free Books</h2>
+  <li><b href="books/sem1.pdf" download>Semester 1</b></li>
+  <li><b href="books/sem2.pdf" download>Semester 2</b></li>
+  <li><b href="books/sem3.pdf" download>Semester 3</b></li>
+  <li><b href="books/sem4.pdf" download>Semester 4</b></li>
+  <li><b href="books/sem5.pdf" download>Semester 5</b></li>
+  <li><b href="books/sem6.pdf" download>Semester 6</b></li>
+  <li><b href="books/sem7.pdf" download>Semester 7</b></li>
+  <li><b href="books/sem8.pdf" download>Semester 8</b></li>
+</div>
+          
+            
+<style>
+  b:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  b:visited {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  b:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  
+  b:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  </style>
+
+<div class="papers">
+  <h2>Past papers</h2>
+  <li><b href="paper/2020.pdf" download>Year 2024</b></li>
+  <li><b href="paper/2020.pdf" download>Year 2023</b></li>
+  <li><b href="paper/2020.pdf" download>Year 2022</b></li>
+  <li><b href="paper/2020.pdf" download>Year 2021</b></li>
+  <li><b href="paper/2020.pdf" download>Year 2020</b></li>
+  <li><b href="paper/2020.pdf" download>Year 2019</b></li>
+  <li><b href="paper/2020.pdf" download>Year 2018</b></li>
+  <li><b href="paper/2020.pdf" download>Year 2017</b></li>
+</div>
+<style>
+  b:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  b:visited {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  b:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  
+  b:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  </style>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
